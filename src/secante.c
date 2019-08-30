@@ -21,8 +21,14 @@ auto calculatedError = [](double x1, double x2)->double{
 auto delta = [](double x0,double x1 ) -> double {
     return x1 - x0;
 };
+
 auto nextStepSecant = [](auto fn, double x0, double x1 )->double{
-    return   x1 - ( fn(x1) * delta(x0,x1) / delta(fn(x0), fn(x1) ) );
+    //    translate some vars
+    double deltaX = delta(x0,x1),
+           deltaY = delta(fn(x0),fn(x1)),
+           y1 = fn(x1);
+    // return the simplified equation
+    return   x1 - ( y1 *  deltaX/deltaY) ;
 };
 
 /* main equation: */
@@ -43,7 +49,7 @@ auto printToOutput = [] (double x,  const char* prefix = "") -> bool{
 };
 
 
-
+/* test with others functions  */
 auto fnCubicRoot = [](double x) -> double{
     return (x * x * x) -3;
 };
@@ -64,9 +70,9 @@ int main(){
 
     /* lets test with other funtions */
 
-    double cubicRootOfTwo = secantMethod( fnCubicRoot, x0, x1, errorMax);
+    double cubicRootOfThree = secantMethod( fnCubicRoot, x0, x1, errorMax);
 
-    printToOutput(cubicRootOfTwo, "result of three");
+    printToOutput(cubicRootOfThree, "result cubic root of three");
 
     /* double rootOfThree: */
 
