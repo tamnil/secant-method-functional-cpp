@@ -1,6 +1,7 @@
 /*
  * Tamnil Saito Junior 2019
  *
+ * Secants method
  * please use c++ >= v11.x
  * tested with g++ - linux-ubuntu
  */
